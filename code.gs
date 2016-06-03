@@ -1,14 +1,15 @@
 //fetch incoming hook
+//deploy script as webapp and set /exec URL as webhook in PostmarkApp
+
 function doPost(e) {
-    var c = e.postData.contents;
-    var postmarkData = JSON.parse(c);
+    var postmarkData = JSON.parse(e.postData.contents);
     
     //postmarkData is the object as described in postmarkAPI docs.
     
     //fetch attachments
-    if (data.Attachments.length>0) {
-        if (data.Attachments[0].Content) {
-          var blob = Utilities.newBlob(Utilities.base64Decode(data.Attachments[0].Content), data.Attachments[0].ContentType).setName(data.Attachments[0].Name);
+    if (postmarkData.Attachments.length>0) {
+        if (postmarkData.Attachments[0].Content) {
+          var blob = Utilities.newBlob(Utilities.base64Decode(postmarkData.Attachments[0].Content), postmarkData.Attachments[0].ContentType).setName(postmarkData.Attachments[0].Name);
           //use blob further in GAS
         
         }
